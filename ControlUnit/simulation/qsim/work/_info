@@ -1,0 +1,85 @@
+m255
+K3
+13
+cModel Technology
+Z0 dE:\SingleCycleProcessorMIPS\ControlUnit\simulation\qsim
+vcontrolUnit
+Z1 !s100 zd9g2Gj56^gARLBlZ6IdK1
+Z2 ImO[INlKo>UQ4IN3NYHbXA0
+Z3 V5AeGRI:o6NDZo[RkbFdeQ3
+Z4 dE:\SingleCycleProcessorMIPS\ControlUnit\simulation\qsim
+Z5 w1747995837
+Z6 8controlUnit.vo
+Z7 FcontrolUnit.vo
+L0 31
+Z8 OV;L;10.1d;51
+r1
+31
+Z9 !s90 -work|work|controlUnit.vo|
+Z10 o-work work -O0
+Z11 ncontrol@unit
+!i10b 1
+!s85 0
+Z12 !s108 1747995838.673000
+Z13 !s107 controlUnit.vo|
+!s101 -O0
+vcontrolUnit_vlg_check_tst
+!i10b 1
+Z14 !s100 79<o@]4z8a`^Vh34gK5@G0
+Z15 Ij6>D5;Tc:=TTzg2iNX8lS0
+Z16 VF1PfEjSQ<g;2ziHCz0k:f2
+R4
+Z17 w1747995835
+Z18 8Waveform.vwf.vt
+Z19 FWaveform.vwf.vt
+L0 63
+R8
+r1
+!s85 0
+31
+Z20 !s108 1747995838.807000
+Z21 !s107 Waveform.vwf.vt|
+Z22 !s90 -work|work|Waveform.vwf.vt|
+!s101 -O0
+R10
+Z23 ncontrol@unit_vlg_check_tst
+vcontrolUnit_vlg_sample_tst
+!i10b 1
+Z24 !s100 ^52KWg6;THeJUDUGaG:<12
+Z25 I<D:B;cjMeT51RSDlW[DTM0
+Z26 VWheFMQ1n0b1<zXUbddc;`1
+R4
+R17
+R18
+R19
+L0 29
+R8
+r1
+!s85 0
+31
+R20
+R21
+R22
+!s101 -O0
+R10
+Z27 ncontrol@unit_vlg_sample_tst
+vcontrolUnit_vlg_vec_tst
+!i10b 1
+!s100 L8Hz_`SB;[;ZMKNKdM>Y>0
+I`7FJFXin21DV@KWkYZC=F2
+Z28 VEh6ai1e71lThd]@ozjFG60
+R4
+R17
+R18
+R19
+Z29 L0 1391
+R8
+r1
+!s85 0
+31
+R20
+R21
+R22
+!s101 -O0
+R10
+Z30 ncontrol@unit_vlg_vec_tst

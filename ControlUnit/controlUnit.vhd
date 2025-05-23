@@ -4,20 +4,25 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 use work.MyPackage.all;
 
-entity decodeModule is
+entity controlUnit is
     port(
         hex0, hex1, hex2, hex3, hex4, hex5, hex6, hex7 : out std_logic_vector(6 downto 0);
-        leds  : out std_logic_vector(3 downto 0);
+        leds  : out std_logic_vector(9 downto 0);
         topclock, topreset : in std_logic;
         RegWRT : in std_logic;
-        sw : in std_logic_vector(4 downto 0)  --> switch
+        sw : in std_logic_vector(4 downto 0)
     );
-end decodeModule;
+end controlUnit;
 
-architecture bhv of decodeModule is
+architecture bhv of controlUnit is
 	signal top_instruction,top_pcout : std_LOGIC_VECTOR(31 downto 0);
 	signal reg_rs, reg_rt, reg_rd, immediate, j_addr, hexout : std_logic_vector(31 downto 0);
-
+	signal jump, RegDst, RegWrite, MemToReg, ALUSrc, beq_control, MemRead, MemWrite : std_logic;
+	signal ALUOp : std_logic_vector(1 downto 0);
+	 signal read_data : std_logic_vector(31 downto 0);
+	 signal address : std_logic_vector(31 downto 0);	
+	 signal opcode : std_logic_vector(5 downto 0);
+	 
 begin
     -- Progaram Counter
 	f1: fetch port map (
@@ -30,9 +35,8 @@ begin
         reset              => topreset,
         clock              => topclock
     );	
-	 leds <= top_pcout(3 downto 0);
 
-    f2: decode port map (
+    F2: decode port map (
         instruction     => top_instruction,
         clock           => topclock,
         reset           => topreset,
@@ -47,6 +51,32 @@ begin
         memory_data     => x"00000005",
         alu_result      => x"00000000"
     );
+	 u_memory: memory
+		port map(
+		address => reg_rs,
+		 write_data => reg_rt,
+		 MemWrite => MemWrite,
+		 MemRead => MemRead,
+		 read_data => read_data
+		);
+	 opcode <= top_instruction(31 downto 26);
+	 
+	 
+	 u_control: control
+		port map (
+			pc => top_pcout,
+			instruction => top_instruction,
+			reset => topreset,
+			jump => jump,
+			RegDst => RegDst,
+			RegWrite => RegWrite,
+			MemToReg => MemToReg,
+			ALUOp => ALUOp,
+			ALUSrc => ALUSrc,
+			beq_control => beq_control,
+			MemRead => MemRead,
+			MemWrite => MemWrite
+		);
 
 		hexout <= 	top_instruction when (sw ="00000")else
 				reg_rs 			when (sw ="00001")else
@@ -89,5 +119,13 @@ begin
         bininput => hexout(3 downto 0),
         cathodes => hex0
     );
+	 
+	 with opcode select leds <=
+    "1001000010" when "000000", -- R-type
+    "0111100000" when "100011",  -- lw
+    "0100010000" when "101011",  -- sw
+    "0000001001" when "000100",  -- beq
+	 "0000000100" when "000010",  -- j
+    "0000000000" when others;
 
 end bhv;
